@@ -1,0 +1,302 @@
+File Name: Marvellous.txt
+Marvellous.txt
+Marvellous1.txt
+Program1.java
+Program2.java
+Program3.java
+Program4.java
+Program5.java
+
+_______________________________________________________________
+
+File Name: marvellous1.txt
+
+_______________________________________________________________
+
+File Name: Program1.java
+import java.io.*;
+import java.util.*;
+
+class Program1
+{
+    public static void main(String A[])
+    {
+        int i = 0;
+        String dir = null;
+        
+        Scanner sobj = new Scanner(System.in);
+
+        System.out.println("Enter directory name:");
+        dir = sobj.nextLine();
+
+        File fobj = new File(dir);
+
+        if(fobj.exists() && fobj.isDirectory())
+        {
+            File list[] = fobj.listFiles();
+
+            System.out.println("Regular files:");
+
+            for(i = 0; i < list.length; i++)
+            {
+                if(list[i].isFile())
+                {
+                    System.out.println(list[i].getName());
+                }
+            }
+        }
+        else
+        {
+            System.out.println("Invalid directory");
+        }
+        sobj.close();
+    }
+}
+
+_______________________________________________________________
+
+File Name: Program2.java
+import java.util.Scanner;
+import java.io.*;
+
+class Program2
+{
+    public static void main(String A[]) throws Exception
+    {
+        String FolderName = null;
+        int i = 0;
+        
+        Scanner sobj = new Scanner(System.in);
+
+        System.out.println("enter folder name:");
+        FolderName = sobj.nextLine();
+
+        File fobj = new File(FolderName);
+        
+        if((fobj.exists()) && (fobj.isDirectory()))
+        {
+        System.out.println("Folder is present");
+        
+        File fArr[] = fobj.listFiles();
+        
+        File MarvellousObj = new File("Marvellous.txt");
+        MarvellousObj.createNewFile();
+        
+        FileWriter fwobj = new FileWriter(MarvellousObj);
+        
+        System.out.println("Writing file names to Marvellous.txt...");
+        
+        for(i = 0; i < fArr.length; i++)
+        {
+            if(fArr[i].isFile())
+            {
+                fwobj.write(fArr[i].getName() + "\n");
+            }
+        }
+        
+        fwobj.close();
+        System.out.println("File names written successfully");
+        }
+        else
+       {
+          System.out.println("There is no such folder");
+       }
+    
+       sobj.close();
+}
+}
+
+_______________________________________________________________
+
+File Name: Program3.java
+import java.io.*;
+import java.util.*;
+
+class Program3
+{
+    public static void main(String A[]) throws Exception
+    {
+        int iRet = 0;
+        byte Buffer[] = new byte[1024];
+        Scanner sobj = new Scanner(System.in);
+
+        System.out.println("Enter the name of folder: ");
+        String FolderName = sobj.nextLine();
+
+        File fobj = new File(FolderName);
+        
+        if((fobj.exists()) && (fobj.isDirectory()))
+        {
+            int i = 0;
+            File MarvellousObj = new File("Marvellous.txt");
+            MarvellousObj.createNewFile();
+            
+            FileOutputStream foobj = new FileOutputStream(MarvellousObj);
+            FileInputStream fiobj = null;
+
+            System.out.println("Folder is present");
+            
+            File fArr[] = fobj.listFiles();
+            
+            System.out.println("Writing data of all files to Marvellous.txt...");
+            
+            for(i = 0; i < fArr.length; i++)
+            {
+                if(fArr[i].isFile())
+                {
+                    fiobj = new FileInputStream(fArr[i]);
+                    
+                    while((iRet = fiobj.read(Buffer)) != -1)
+                    {
+                        foobj.write(Buffer, 0, iRet);
+                    }
+                    
+                    fiobj.close();
+                }
+            }
+            
+            foobj.close();
+            System.out.println("Data written successfully");
+        }
+        else
+        {
+            System.out.println("There is no such folder");
+        }
+        
+        sobj.close();
+    }
+}
+
+_______________________________________________________________
+
+File Name: Program4.java
+import java.io.*;
+import java.util.*;
+
+class Program4
+{
+    public static void main(String A[])
+    {
+        int i = 0;
+        Scanner sobj = new Scanner(System.in);
+
+        System.out.println("Enter directory name:");
+        String dirname = sobj.nextLine();
+
+        File folder = new File(dirname);
+
+        if(folder.exists() && folder.isDirectory())
+        {
+            try
+            {
+                FileWriter fw = new FileWriter("marvellous1.txt");
+
+                File files[] = folder.listFiles();
+
+                for(i = 0; i < files.length; i++) 
+                {
+                    if(files[i].isFile())
+                    {
+                        fw.write("File Name: " + files[i].getName() + "\n");
+
+                        BufferedReader br = new BufferedReader(new FileReader(files[i]));
+
+                        String line;
+
+                        while((line = br.readLine()) != null)
+                        {
+                            fw.write(line + "\n");
+                        }
+
+                        fw.write("\n_______________________________________________________________\n\n");
+                        br.close();
+                    }
+                }
+
+                fw.close();
+                System.out.println("Data written into marvellous1.txt");
+            }
+            catch(Exception e)
+            {
+                System.out.println("Error: " + e);
+            }
+        }
+        else
+        {
+            System.out.println("Invalid directory");
+        }
+    }
+}
+
+_______________________________________________________________
+
+File Name: Program5.java
+import java.io.*;
+import java.util.*;
+
+class Program5
+{
+    public static void main(String A[]) throws Exception
+    {
+        int iRet = 0;
+        byte Buffer[] = new byte[1024];
+        Scanner sobj = new Scanner(System.in);
+
+        System.out.println("Enter the name of folder: ");
+        String FolderName = sobj.nextLine();
+
+        File fobj = new File(FolderName);
+        
+        if((fobj.exists()) && (fobj.isDirectory()))
+        {
+            File MarvellousObj = new File("Marvellous.txt");
+            MarvellousObj.createNewFile();
+            
+            FileOutputStream foobj = new FileOutputStream(MarvellousObj);
+            FileInputStream fiobj = null;
+
+            System.out.println("Folder is present");
+            
+            File fArr[] = fobj.listFiles();
+            
+            System.out.println("Writing file details and data to Marvellous.txt...");
+            
+            for(int i = 0; i < fArr.length; i++)
+            {
+                if(fArr[i].isFile())
+                {
+                    Header = Header + "File Name: " + fArr[i].getName() + "\n";
+                    Header = Header + "File Size: " + fArr[i].length() + " bytes\n";
+
+                    Header = Header + "File Data:\n";
+                    
+                    byte HeaderArr[] = Header.getBytes();
+                    foobj.write(HeaderArr, 0, HeaderArr.length);
+                    
+                    fiobj = new FileInputStream(fArr[i]);
+                    
+                    while((iRet = fiobj.read(Buffer)) != -1)
+                    {
+                        foobj.write(Buffer, 0, iRet);
+                    }
+                    
+                    foobj.write("\n\n".getBytes());
+                    fiobj.close();
+                }
+            }
+            
+            foobj.close();
+            System.out.println("File details and data written successfully");
+            System.out.println("Check Marvellous.txt for consolidated information");
+        }
+        else
+        {
+            System.out.println("There is no such folder");
+        }
+        
+        sobj.close();
+    }
+}
+
+_______________________________________________________________
+
