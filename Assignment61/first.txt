@@ -1,0 +1,19 @@
+import java.io.*;
+import java.util.*;
+
+class Program4
+{
+    public static void main(String A[]) throws Exception
+    {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("First file: ");
+        String File1 = sc.nextLine();
+
+        System.out.print("Second file: ");
+        String File2 = sc.nextLine();
+
+        System.out.print("Output file: ");
+        String File3 = sc.nextLine();
+
+        FileInputStream fiobj1 = new FileInputStre
